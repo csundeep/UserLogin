@@ -1,8 +1,10 @@
 package com.sourcey.materiallogindemo;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,10 +15,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("tracker", 0);
+        Log.v("@@@@@@@@@@@@@",""+pref.getString("email", null));
+        if (pref.getString("email", null) == null || pref.getString("password", null) == null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
